@@ -1,0 +1,32 @@
+def implement_caesar_cipher(message, key, decrypt=False):
+    # Initialize an empty string to store the result.
+    result = ""
+    # Iterate through each character in the user's input message.
+    for character in message:
+        # Check if the character is an alphabet letter.
+        if character.isalpha():
+            # Determine the shift amount based. i.e the amount of times to be shifted e.g 2,3,4....
+            shift = key if not decrypt else -key
+            # Check if the character is a lowercase letter.
+            if character.islower():
+                # Apply Caesar cipher transformation for lowercase letters.
+                result += chr(((ord(character) - ord('a') + shift) % 26) + ord('a'))
+            else:
+                # Apply Caesar cipher transformation for uppercase letters.
+                result += chr(((ord(character) - ord('A') + shift) % 26) + ord('A'))
+        else:
+            # Preserve non-alphabet characters as they are.
+            result += character
+    return result
+
+# Example usage:
+message = "{Prodigy, Tech!6"
+key = 3
+
+# Encrypt the message
+encrypted_message = implement_caesar_cipher(message, key)
+print("Encrypted:", encrypted_message)
+
+# Decrypt the message
+decrypted_message = implement_caesar_cipher(encrypted_message, key, decrypt=True)
+print("Decrypted:", decrypted_message)
